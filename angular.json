@@ -28,7 +28,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/theme.scss"
             ],
             "scripts": []
           },
@@ -123,6 +124,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "blog-template-ui"
+    }
+  },
+  "defaultProject": "blog-template-ui",
+  "cli": {
+    "analytics": "225d15c0-d199-4a26-b925-4faf1732dc6e"
+  }
 }
