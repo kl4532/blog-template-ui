@@ -9,7 +9,7 @@ import {SharedModule} from '../shared/shared.module';
 
 const routes: Routes = [
   { path: 'blog', component: PostListComponent },
-  { path: 'blog/id:', component: PostDetailComponent },
+  { path: 'blog/:id', component: PostDetailComponent },
   { path: 'dashboard', component: PostDashboardComponent },
 ];
 
