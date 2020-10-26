@@ -38,19 +38,11 @@ export class PostService {
     this.postCollection.add(data);
   }
 
-  getPost(id: string) {
-    return this.afs.doc<Post>(`post/${id}`);
-  }
-
   delete(id: string) {
-    return this.getPost(id).ref.delete().then(() => {
-      console.log("Document successfully deleted!");
-    }).catch((error) => {
-      console.error("Error removing document: ", error);
-    });
+    return this.postCollection.doc(id).delete();
   }
 
   update(id: string, formData) {
-    return this.getPost(id).update(formData);
+    return this.postCollection.doc(id).update(formData);
   }
 }

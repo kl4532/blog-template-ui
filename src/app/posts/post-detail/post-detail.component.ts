@@ -25,7 +25,6 @@ export class PostDetailComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     return this.postService.getPostData(id).subscribe(data => this.post = data);
   }
-//to fix
   updatePost() {
     const formData = {
       title: this.post.title,
@@ -35,7 +34,6 @@ export class PostDetailComponent implements OnInit {
     this.postService.update(id, formData);
     this.editing = false;
   }
-//to fix
   delete() {
     const id = this.route.snapshot.paramMap.get('id');
     this.postService.delete(id);
