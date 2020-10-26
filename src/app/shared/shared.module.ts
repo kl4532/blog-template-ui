@@ -4,10 +4,11 @@ import { MaterialModule } from '../material.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import {RouterModule} from '@angular/router';
 import { FormsModule} from '@angular/forms';
+import { ConfirmDialogComponent} from './confirm-dialog/confirm-dialog.component';
 
 
 @NgModule({
-  declarations: [NavbarComponent],
+  declarations: [NavbarComponent, ConfirmDialogComponent],
   imports: [
     CommonModule,
     MaterialModule,
@@ -19,7 +20,8 @@ import { FormsModule} from '@angular/forms';
     MaterialModule,
     NavbarComponent,
     RouterModule,
-    FormsModule
+    FormsModule,
+    ConfirmDialogComponent
   ]
 })
 export class SharedModule { }

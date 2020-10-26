@@ -7,13 +7,14 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 @NgModule({
   declarations: [],
   imports: [MatButtonModule, MatToolbarModule, MatExpansionModule, MatInputModule,
-    MatGridListModule, MatProgressBarModule, MatCardModule, MatIconModule],
+    MatGridListModule, MatProgressBarModule, MatCardModule, MatIconModule, MatDialogModule],
   exports: [MatButtonModule, MatToolbarModule, MatExpansionModule, MatInputModule,
-    MatGridListModule, MatProgressBarModule, MatCardModule, MatIconModule]
+    MatGridListModule, MatProgressBarModule, MatCardModule, MatIconModule, MatDialogModule]
 })
 export class MaterialModule { }
