@@ -7,15 +7,15 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
 
-      <div>
-        <input type="file" name="file" id="file" (change)="uploadImage($event)" >
-        <div [hidden]="!uploadPercent">
-          <mat-progress-bar mode="determinate" value="{{uploadPercent | async}}"></mat-progress-bar>
-        </div>
-        <div [hidden]="!image">
-          <img [src]="image || '//:0'">
-        </div>
+      <div [hidden]="!uploadPercent">
+        <mat-progress-bar mode="determinate" value="{{uploadPercent | async}}"></mat-progress-bar>
       </div>
+      <ngx-dropzone [expandable]="true" (change)="onAddPhoto($event)">
+        <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
+        <ngx-dropzone-image-preview   ngProjectAs="ngx-dropzone-preview" [file]=f *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+        </ngx-dropzone-image-preview >
+      </ngx-dropzone>
+
 
       <mat-grid-list [cols]="1">
         <mat-form-field>
@@ -24,7 +24,7 @@
         <mat-form-field>
           <textarea matInput placeholder="Post Content" [(ngModel)]="content" rows="15"></textarea>
         </mat-form-field>
-        <button mat-raised-button color="accent" (click)="createPost()" [disabled]="!title || !content || !image">{{buttonText}}</button>
+        <button mat-raised-button color="accent" (click)="createPost()" [disabled]="!title || !content || (uploadPercent | async) !== 100">{{buttonText}}</button>
       </mat-grid-list>
     </mat-expansion-panel>
   </mat-accordion>

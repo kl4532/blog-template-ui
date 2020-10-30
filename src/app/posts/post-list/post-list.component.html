@@ -1,8 +1,13 @@
 <section>
   <mat-card *ngFor="let post of posts | async ">
     <mat-card-content routerLink="{{post.id}}">
-      <img src="{{post.image}}" alt="{{post.title}}">
+      <div *ngIf = "post.imagesUrl" >
+        <div *ngFor="let image of post.imagesUrl">
+          <img src="{{image}}">
+        </div>
+      </div>
       <h2>{{post.title}}</h2>
+      <p routerLink="" class="truncate-text">{{ post.content }}</p>
       <p><small>Posted by {{post.author}}</small></p>
     </mat-card-content>
     <mat-card-actions align="end" *ngIf="auth.currentUserId === post.authorId">

@@ -4,7 +4,7 @@ export class Post {
   author: string
   authorId: string
   content:string
-  image: string
+  imagesUrl: string[]
   published: any
 }
 

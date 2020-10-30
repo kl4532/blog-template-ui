@@ -4,6 +4,8 @@ import {PostService} from '../post.service';
 import {Observable} from 'rxjs';
 import { AngularFireStorage } from 'angularfire2/storage';
 import {finalize} from 'rxjs/operators';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-post-dashboard',
@@ -13,16 +15,20 @@ import {finalize} from 'rxjs/operators';
 export class PostDashboardComponent implements OnInit {
 
   title: string;
-  image: string = null;
+  imagesUrl: string[] = [];
   content: string;
 
   buttonText: string = 'Create Post';
   uploadPercent: Observable<number>;
+  uploadFinished: boolean = true;
   downloadURL: Observable<string>;
+
+  files: File[] = [];
 
   constructor(private authService: AuthService,
               private postService: PostService,
-              private storage: AngularFireStorage) { }
+              private storage: AngularFireStorage,
+              private http: HttpClient) { }
 
   ngOnInit(): void {
   }
@@ -32,35 +38,52 @@ export class PostDashboardComponent implements OnInit {
       author: this.authService.authState.displayName || this.authService.authState.email,
       authorId: this.authService.currentUserId,
       content: this.content,
-      image: this.image,
+      imagesUrl: this.imagesUrl,
       published: new Date(),
       title: this.title
     };
+    console.log('data', data);
+
     this.postService.create(data);
     this.title = '';
     this.content = '';
 
+
     this.buttonText = 'Post Created';
     setTimeout((() => this.buttonText = 'Create post'), 2000);
+
   }
 
-  uploadImage(event) {
-    const file = event.target.files[0];
+  // Upload each image just after adding
+
+  uploadImage(file: File, index: number) {
+
     const path = `posts/${file.name}`;
-    if (file.type.split('/')[0] !== 'image') {
-      alert('Only text');
-    } else {
-      const task = this.storage.upload(path, file);
-      const ref = this.storage.ref(path);
-      this.uploadPercent = task.percentageChanges();
-      console.log('Image uploaded');
-      task.snapshotChanges().pipe(
-        finalize(() => {
-          this.downloadURL = ref.getDownloadURL();
-          this.downloadURL.subscribe(url => this.image = url);
-        })
-      ).subscribe();
+    const task = this.storage.upload(path, file);
+    const ref = this.storage.ref(path);
+    this.uploadPercent = task.percentageChanges();
+    task.percentageChanges().subscribe(res => res === 100 ? this.uploadFinished = true : this.uploadFinished = false);
+    task.snapshotChanges().pipe(
+      finalize(() => {
+        this.downloadURL = ref.getDownloadURL();
+        this.downloadURL.subscribe(url => {
+          this.imagesUrl[index] = url;
+        });
+      })
+    ).subscribe();
+  }
+
+  onAddPhoto(event) {
+    console.log(event);
+    this.files.push(...event.addedFiles);
+    for (let i = 0; i < this.files.length; i++) {
+      this.uploadImage(this.files[i], i);
     }
+  }
+
+  onRemove(event) {
+      this.files.splice(this.files.indexOf(event), 1);
+      this.imagesUrl.splice(this.imagesUrl.indexOf(event), 1);
   }
 
 }
