@@ -5,6 +5,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import {RouterModule} from '@angular/router';
 import { FormsModule} from '@angular/forms';
 import { ConfirmDialogComponent} from './confirm-dialog/confirm-dialog.component';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 
 @NgModule({
@@ -13,7 +15,9 @@ import { ConfirmDialogComponent} from './confirm-dialog/confirm-dialog.component
     CommonModule,
     MaterialModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    NgxDropzoneModule,
+    HttpClientModule
   ],
   exports: [
     CommonModule,
@@ -21,7 +25,9 @@ import { ConfirmDialogComponent} from './confirm-dialog/confirm-dialog.component
     NavbarComponent,
     RouterModule,
     FormsModule,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    NgxDropzoneModule,
+    HttpClientModule
   ]
 })
 export class SharedModule { }
