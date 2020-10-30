@@ -30,3 +30,10 @@ $blog-template-ui-theme: mat-light-theme($blog-template-ui-primary, $blog-templa
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.truncate-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
