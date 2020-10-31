@@ -1,18 +1,6 @@
 <ng-container *ngIf="post">
   <div [hidden]="!editing">
-    <mat-card>
-      <h1>Edit Post</h1>
-      <mat-form-field>
-        <input matInput placeholder="Post title" [(ngModel)]="post.title" name="title">
-      </mat-form-field>
-      <br>
-      <mat-form-field>
-        <textarea matInput placeholder="Post content" [(ngModel)]="post.content" name="content" rows="10"></textarea>
-      </mat-form-field>
-      <br>
-      <button mat-raised-button (click)="updatePost()" color="accent">Save</button>
-      <button mat-button (click)="editing=false" *ngIf="editing">Cancel</button>
-    </mat-card>
+    <app-post-dashboard (editFinished)="editing = !$event" *ngIf="post" [editMode]="true" [post]="post"></app-post-dashboard>
   </div>
 
   <div [hidden]="editing">
