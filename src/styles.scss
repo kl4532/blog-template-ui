@@ -37,3 +37,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   text-overflow: ellipsis;
 }
 
+.success-snackbar {
+  background-color: #9acd32 !important;
+  color: #ffffff !important;
+  span {
+    color: white !important;
+  }
+}
+
