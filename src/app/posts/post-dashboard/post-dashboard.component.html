@@ -1,9 +1,9 @@
 <section>
   <mat-accordion>
-    <mat-expansion-panel>
+    <mat-expansion-panel expanded="true">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Create Post
+          {{ modeTitle }}
         </mat-panel-title>
       </mat-expansion-panel-header>
 
@@ -12,10 +12,16 @@
       </div>
       <ngx-dropzone [expandable]="true" (change)="onAddPhoto($event)">
         <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
-        <ngx-dropzone-image-preview   ngProjectAs="ngx-dropzone-preview" [file]=f *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
-        </ngx-dropzone-image-preview >
+        <ng-container *ngIf="!editMode">
+          <ngx-dropzone-image-preview   ngProjectAs="ngx-dropzone-preview" [file]=f *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+          </ngx-dropzone-image-preview >
+        </ng-container>
       </ngx-dropzone>
-
+      <div *ngIf="imagesUrl && editMode">
+        <mat-grid-list cols="4" rowHeight="1:1">
+          <mat-grid-tile *ngFor="let url of imagesUrl" (click)="onRemove(url)"><img [src]="url" alt=""></mat-grid-tile>
+        </mat-grid-list>
+      </div>
 
       <mat-grid-list [cols]="1">
         <mat-form-field>
@@ -24,7 +30,10 @@
         <mat-form-field>
           <textarea matInput placeholder="Post Content" [(ngModel)]="content" rows="15"></textarea>
         </mat-form-field>
-        <button mat-raised-button color="accent" (click)="createPost()" [disabled]="!title || !content || (uploadPercent | async) !== 100">{{buttonText}}</button>
+        <button mat-raised-button color="accent" *ngIf="!editMode" (click)="createPost()" [disabled]="!title || !content">{{buttonText}}</button>
+        <button mat-raised-button *ngIf="editMode" (click)="updatePost()" color="accent">Save</button>
+        <button mat-button (click)="editMode=false" *ngIf="editMode">Cancel</button>
+
       </mat-grid-list>
     </mat-expansion-panel>
   </mat-accordion>
