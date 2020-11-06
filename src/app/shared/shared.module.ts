@@ -7,7 +7,7 @@ import { FormsModule} from '@angular/forms';
 import { ConfirmDialogComponent} from './confirm-dialog/confirm-dialog.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxDropzoneModule } from 'ngx-dropzone';
-
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [NavbarComponent, ConfirmDialogComponent],
@@ -17,7 +17,8 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     RouterModule,
     FormsModule,
     NgxDropzoneModule,
-    HttpClientModule
+    HttpClientModule,
+    CKEditorModule,
   ],
   exports: [
     CommonModule,
@@ -27,7 +28,8 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     FormsModule,
     ConfirmDialogComponent,
     NgxDropzoneModule,
-    HttpClientModule
+    HttpClientModule,
+    CKEditorModule,
   ]
 })
 export class SharedModule { }

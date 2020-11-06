@@ -30,7 +30,6 @@ export class PostDashboardComponent implements OnInit {
   @Input() editMode: boolean = false;
   @Input() post: Post;
   @Output() editFinished: EventEmitter<boolean> = new EventEmitter<boolean>();
-  newImagesUrl: string[] = [];
 
 
   files: File[] = [];
@@ -45,7 +44,6 @@ export class PostDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.editMode) {
-        console.log('post', this.post);
         this.modeTitle = 'Edit post';
         this.fetchPostData();
     };
