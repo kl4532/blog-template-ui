@@ -8,18 +8,10 @@ import { AuthService } from '../../core/auth.service';
 })
 export class NavbarComponent implements OnInit {
 
-  isAdmin: boolean;
+  isAdmin: boolean = false;
   constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
-    // TO FIX
-    // this should be placed in auth service, and call here only to set flag
-    this.authService.getAdmins().subscribe(admins => {
-      const res = admins.find( admin => admin['email'] === this.authService.currentUserEmail);
-       res === undefined ? this.isAdmin = false : this.isAdmin = true;
-    });
-
-    // this.isAdmin = this.authService.isAdmin();
+    this.authService.isAdmin().subscribe(flag => this.isAdmin = flag);
   }
-
 }

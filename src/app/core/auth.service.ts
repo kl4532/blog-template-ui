@@ -38,6 +38,13 @@ export class AuthService {
     );
   }
 
+  isAdmin() {
+    return this.getAdmins().pipe(map(admins => {
+      const res = admins.find( admin => admin['email'] === this.currentUserEmail);
+      return res === undefined ? false : true;
+    }));
+  }
+
   get currentUserId(): string {
     return this.authenticated ? this.authState.uid : null;
   }
