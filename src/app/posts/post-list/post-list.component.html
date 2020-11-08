@@ -2,8 +2,8 @@
   <mat-card *ngFor="let post of posts | async ">
     <mat-card-content routerLink="{{post.id}}">
       <div *ngIf = "post.imagesUrl" >
-        <div *ngFor="let image of post.imagesUrl">
-          <img src="{{image}}">
+        <div>
+          <img src="{{post.imagesUrl[0]}}">
         </div>
       </div>
       <h2>{{post.title}}</h2>
