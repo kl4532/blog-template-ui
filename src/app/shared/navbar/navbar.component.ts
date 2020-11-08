@@ -8,10 +8,8 @@ import { AuthService } from '../../core/auth.service';
 })
 export class NavbarComponent implements OnInit {
 
-  isAdmin: boolean = false;
   constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
-    this.authService.isAdmin().subscribe(flag => this.isAdmin = flag);
   }
 }

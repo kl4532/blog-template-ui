@@ -14,10 +14,12 @@ export class AuthService {
 
   adminsCollection: AngularFirestoreCollection<Admin>;
   authState: any = null;
+  authAdmin: any = null;
 
   constructor(public afAuth: AngularFireAuth, private afs: AngularFirestore) {
     this.afAuth.authState.subscribe(data => this.authState = data);
     this.adminsCollection = this.afs.collection('admins', ref => ref);
+    this.authAdmin = this.isAdmin();
   }
 
   get authenticated(): boolean {
