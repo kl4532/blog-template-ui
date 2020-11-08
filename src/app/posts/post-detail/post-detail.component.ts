@@ -5,6 +5,7 @@ import {Post} from '../post';
 import {AuthService} from '../../core/auth.service';
 import {MatDialog} from '@angular/material/dialog';
 import {ConfirmDialogComponent, ConfirmDialogModel} from '../../shared/confirm-dialog/confirm-dialog.component';
+import {AngularFireStorage} from 'angularfire2/storage';
 
 @Component({
   selector: 'app-post-detail',
@@ -18,7 +19,8 @@ export class PostDetailComponent implements OnInit {
               private router: Router,
               private postService: PostService,
               public auth: AuthService,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog,
+              private storage: AngularFireStorage) { }
 
   ngOnInit(): void {
     this.getPost();

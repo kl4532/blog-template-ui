@@ -5,6 +5,7 @@ export class Post {
   authorId: string
   content:string
   imagesUrl: string[]
+  imagesName: string[]
   published: any
 }
 

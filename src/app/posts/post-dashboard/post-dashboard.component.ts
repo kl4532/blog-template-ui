@@ -19,6 +19,7 @@ export class PostDashboardComponent implements OnInit {
 
   title: string;
   imagesUrl: string[] = [];
+  imagesName: string[] = [];
   content: string;
 
   buttonText: string = 'Create Post';
@@ -55,6 +56,7 @@ export class PostDashboardComponent implements OnInit {
       authorId: this.authService.currentUserId,
       content: this.content,
       imagesUrl: this.imagesUrl,
+      imagesName: this.imagesName,
       published: new Date(),
       title: this.title
     };
@@ -63,6 +65,7 @@ export class PostDashboardComponent implements OnInit {
     this.content = '';
     this.files = [];
     this.imagesUrl = [];
+    this.imagesName = [];
 
     this.snackBar.open('Post created', 'Ok', {
       duration: 3000,
@@ -75,6 +78,7 @@ export class PostDashboardComponent implements OnInit {
     this.title = this.post.title;
     this.content = this.post.content;
     this.imagesUrl = this.post.imagesUrl;
+    this.imagesName = this.post.imagesName;
   }
 
   // Upload each image just after adding
@@ -91,6 +95,7 @@ export class PostDashboardComponent implements OnInit {
         this.downloadURL = ref.getDownloadURL();
         this.downloadURL.subscribe(url => {
           this.imagesUrl[index] = url;
+          this.imagesName.push(file.name);
         });
       })
     ).subscribe();
@@ -114,6 +119,7 @@ export class PostDashboardComponent implements OnInit {
       title: this.title,
       content: this.content,
       imagesUrl: this.imagesUrl,
+      imagesName: this.imagesName
     };
     const id = this.route.snapshot.paramMap.get('id');
     this.postService.update(id, formData);
